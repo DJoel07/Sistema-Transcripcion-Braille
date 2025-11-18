@@ -1,0 +1,544 @@
+# Manual de Instalación - Sistema de Transcripción Braille
+
+## 📋 Tabla de Contenido
+
+1. [Requisitos del Sistema](#requisitos-del-sistema)
+2. [Opción 1: Instalación Local](#opción-1-instalación-local)
+3. [Opción 2: Instalación con Docker](#opción-2-instalación-con-docker)
+4. [Verificación de la Instalación](#verificación-de-la-instalación)
+5. [Solución de Problemas](#solución-de-problemas)
+
+---
+
+## 🖥️ Requisitos del Sistema
+
+### Requisitos Mínimos
+
+| Componente | Especificación |
+|------------|----------------|
+| **Sistema Operativo** | Windows 10/11, Ubuntu 20.04+, macOS 11+ |
+| **Procesador** | Intel Core i3 o equivalente |
+| **RAM** | 4 GB |
+| **Espacio en Disco** | 500 MB libres |
+| **Navegador Web** | Chrome 90+, Firefox 88+, Edge 90+ |
+
+### Requisitos Recomendados
+
+| Componente | Especificación |
+|------------|----------------|
+| **Sistema Operativo** | Windows 11, Ubuntu 22.04, macOS 12+ |
+| **Procesador** | Intel Core i5 o equivalente |
+| **RAM** | 8 GB |
+| **Espacio en Disco** | 1 GB libres |
+
+### Software Requerido
+
+#### Para Instalación Local
+- **Python** 3.11 o superior
+- **pip** (gestor de paquetes de Python)
+- **Git** (para clonar el repositorio)
+
+#### Para Instalación con Docker
+- **Docker Desktop** 4.0+
+- **Git** (para clonar el repositorio)
+
+---
+
+## 🔧 Opción 1: Instalación Local
+
+### Paso 1: Instalar Python
+
+#### Windows
+
+1. Descargar Python desde [python.org](https://www.python.org/downloads/)
+2. Ejecutar el instalador
+3. ✅ **IMPORTANTE**: Marcar "Add Python to PATH"
+4. Hacer clic en "Install Now"
+
+```powershell
+# Verificar instalación
+python --version
+# Salida esperada: Python 3.11.x o superior
+```
+
+#### Linux (Ubuntu/Debian)
+
+```bash
+# Actualizar repositorios
+sudo apt update
+
+# Instalar Python 3.11
+sudo apt install python3.11 python3.11-venv python3-pip
+
+# Verificar instalación
+python3.11 --version
+```
+
+#### macOS
+
+```bash
+# Con Homebrew
+brew install python@3.11
+
+# Verificar instalación
+python3 --version
+```
+
+### Paso 2: Instalar Git
+
+#### Windows
+1. Descargar desde [git-scm.com](https://git-scm.com/download/win)
+2. Ejecutar el instalador con opciones por defecto
+
+#### Linux
+```bash
+sudo apt install git
+```
+
+#### macOS
+```bash
+brew install git
+```
+
+### Paso 3: Clonar el Repositorio
+
+```bash
+# Navegar al directorio donde quieres instalar
+cd C:\Users\TU_USUARIO\Documentos  # Windows
+cd ~/Documents                      # Linux/Mac
+
+# Clonar repositorio
+git clone https://github.com/DJoel07/Sistema-Transcripcion-Braille.git
+
+# Entrar al directorio
+cd Sistema-Transcripcion-Braille
+
+# Cambiar a rama main (código estable)
+git checkout main
+```
+
+### Paso 4: Crear Entorno Virtual
+
+#### Windows (PowerShell)
+
+```powershell
+# Crear entorno virtual
+python -m venv venv
+
+# Activar entorno virtual
+.\venv\Scripts\Activate.ps1
+
+# Si hay error de política de ejecución:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### Linux/macOS
+
+```bash
+# Crear entorno virtual
+python3.11 -m venv venv
+
+# Activar entorno virtual
+source venv/bin/activate
+```
+
+**Indicador de Éxito**: Debe aparecer `(venv)` al inicio de tu línea de comandos.
+
+### Paso 5: Instalar Dependencias
+
+```bash
+# Actualizar pip
+python -m pip install --upgrade pip
+
+# Instalar dependencias del proyecto
+pip install -r requirements.txt
+```
+
+**Salida Esperada**:
+```
+Successfully installed Flask-3.0.0 reportlab-4.0.7 Werkzeug-3.0.1 python-dotenv-1.0.0 ...
+```
+
+### Paso 6: Configurar Variables de Entorno (Opcional)
+
+```bash
+# Copiar archivo de ejemplo
+cp .env.example .env
+
+# Editar .env con tu editor favorito
+# notepad .env      # Windows
+# nano .env         # Linux
+# vim .env          # Linux/Mac
+```
+
+**Contenido del `.env` (opcional, usa valores por defecto si no lo editas)**:
+```ini
+FLASK_APP=app.py
+FLASK_ENV=development
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
+SECRET_KEY=tu-clave-secreta-aqui
+```
+
+### Paso 7: Ejecutar la Aplicación
+
+```bash
+# Asegurarse de que el entorno virtual está activo
+# (debe aparecer (venv) al inicio de la línea)
+
+# Iniciar servidor
+python app.py
+```
+
+**Salida Esperada**:
+```
+ * Serving Flask app 'app'
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.x.x:5000
+Press CTRL+C to quit
+```
+
+### Paso 8: Acceder a la Aplicación
+
+1. Abrir navegador web
+2. Navegar a: `http://localhost:5000`
+3. Deberías ver la interfaz del Sistema de Transcripción Braille
+
+✅ **¡Instalación Completada!**
+
+---
+
+## 🐳 Opción 2: Instalación con Docker
+
+### Paso 1: Instalar Docker Desktop
+
+#### Windows
+1. Descargar desde [docker.com](https://www.docker.com/products/docker-desktop)
+2. Ejecutar instalador
+3. Reiniciar PC si es necesario
+4. Abrir Docker Desktop y esperar que inicie
+
+#### Linux
+```bash
+# Ubuntu/Debian
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
+# Cerrar y reabrir sesión
+```
+
+#### macOS
+1. Descargar desde [docker.com](https://www.docker.com/products/docker-desktop)
+2. Arrastrar a carpeta Aplicaciones
+3. Abrir Docker Desktop
+
+```bash
+# Verificar instalación
+docker --version
+# Salida esperada: Docker version 24.x.x
+```
+
+### Paso 2: Clonar el Repositorio
+
+```bash
+# Navegar al directorio deseado
+cd ~/Documents  # o C:\Users\TU_USUARIO\Documentos en Windows
+
+# Clonar repositorio
+git clone https://github.com/DJoel07/Sistema-Transcripcion-Braille.git
+
+# Entrar al directorio
+cd Sistema-Transcripcion-Braille
+
+# Cambiar a rama main
+git checkout main
+```
+
+### Paso 3: Construir la Imagen Docker
+
+```bash
+# Construir imagen (esto puede tardar 2-3 minutos)
+docker build -t braille-transcriptor .
+```
+
+**Salida Esperada**:
+```
+[+] Building 45.2s (12/12) FINISHED
+Successfully built abc123def456
+Successfully tagged braille-transcriptor:latest
+```
+
+### Paso 4: Ejecutar el Contenedor
+
+```bash
+# Opción 1: Ejecución en primer plano
+docker run -p 5000:5000 braille-transcriptor
+
+# Opción 2: Ejecución en segundo plano (recomendado)
+docker run -d -p 5000:5000 --name braille-app braille-transcriptor
+```
+
+**Verificar que el contenedor está corriendo**:
+```bash
+docker ps
+
+# Salida esperada:
+# CONTAINER ID   IMAGE                  STATUS         PORTS
+# abc123def456   braille-transcriptor   Up 5 seconds   0.0.0.0:5000->5000/tcp
+```
+
+### Paso 5: Acceder a la Aplicación
+
+1. Abrir navegador
+2. Navegar a: `http://localhost:5000`
+
+✅ **¡Instalación con Docker Completada!**
+
+### Comandos Útiles de Docker
+
+```bash
+# Ver contenedores en ejecución
+docker ps
+
+# Ver logs del contenedor
+docker logs braille-app
+
+# Detener contenedor
+docker stop braille-app
+
+# Reiniciar contenedor
+docker start braille-app
+
+# Eliminar contenedor
+docker rm braille-app
+
+# Ver imágenes
+docker images
+
+# Eliminar imagen
+docker rmi braille-transcriptor
+```
+
+---
+
+## ✅ Verificación de la Instalación
+
+### Checklist de Verificación
+
+#### 1. Verificar que el servidor está corriendo
+
+```bash
+# En terminal (método local)
+# Debe mostrar: Running on http://127.0.0.1:5000
+
+# O para Docker
+docker logs braille-app
+# Debe mostrar logs del servidor Flask
+```
+
+#### 2. Verificar acceso web
+
+1. Abrir `http://localhost:5000`
+2. ✅ La página debe cargar sin errores
+3. ✅ Debe mostrar el título "Transcriptor Braille"
+4. ✅ Debe haber un área de texto y botones
+
+#### 3. Verificar funcionalidad básica
+
+1. En el campo de texto, escribir: `hola`
+2. Hacer clic en "Transcribir a Braille"
+3. ✅ Debe mostrar resultado: `⠓⠕⠇⠁`
+4. ✅ Debe aparecer mensaje de éxito
+
+#### 4. Verificar generación de PDF
+
+1. Después de transcribir
+2. Hacer clic en "Generar Señalética PDF"
+3. ✅ Debe descargarse archivo `senaletica_braille.pdf`
+4. ✅ El PDF debe abrir correctamente
+
+#### 5. Ejecutar Pruebas Unitarias (Solo Instalación Local)
+
+```bash
+# Activar entorno virtual
+.\venv\Scripts\Activate.ps1  # Windows
+source venv/bin/activate      # Linux/Mac
+
+# Ejecutar pruebas
+python -m unittest discover tests/
+
+# Salida esperada: todas las pruebas pasan
+# Ran X tests in Y.ZZZs
+# OK
+```
+
+---
+
+## 🔧 Solución de Problemas
+
+### Problema 1: "Python no se reconoce como comando"
+
+**Causa**: Python no está en el PATH del sistema
+
+**Solución Windows**:
+```powershell
+# Encontrar ubicación de Python
+where python
+
+# Agregar manualmente al PATH:
+# 1. Buscar "Variables de entorno" en Windows
+# 2. Editar "Path" en Variables del sistema
+# 3. Agregar: C:\Users\TU_USUARIO\AppData\Local\Programs\Python\Python311
+```
+
+**Solución Linux/Mac**:
+```bash
+# Usar python3 en lugar de python
+python3 --version
+
+# O crear alias
+echo "alias python=python3" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Problema 2: "ModuleNotFoundError: No module named 'flask'"
+
+**Causa**: Entorno virtual no está activado o dependencias no instaladas
+
+**Solución**:
+```bash
+# 1. Verificar que entorno virtual está activo
+# Debe aparecer (venv) al inicio de la línea
+
+# Si no está activo:
+# Windows
+.\venv\Scripts\Activate.ps1
+
+# Linux/Mac
+source venv/bin/activate
+
+# 2. Reinstalar dependencias
+pip install -r requirements.txt
+```
+
+### Problema 3: Error de política de ejecución (Windows PowerShell)
+
+**Error**: "no se puede cargar el archivo ... porque la ejecución de scripts está deshabilitada"
+
+**Solución**:
+```powershell
+# Ejecutar PowerShell como Administrador
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Luego volver a activar entorno virtual
+.\venv\Scripts\Activate.ps1
+```
+
+### Problema 4: Puerto 5000 ya en uso
+
+**Error**: "Address already in use" o "OSError: [Errno 48]"
+
+**Solución Opción 1**: Cambiar puerto
+```bash
+# Editar .env
+FLASK_PORT=5001
+
+# Reiniciar aplicación
+python app.py
+# Acceder a http://localhost:5001
+```
+
+**Solución Opción 2**: Detener proceso en puerto 5000
+
+**Windows**:
+```powershell
+# Encontrar proceso
+netstat -ano | findstr :5000
+
+# Terminar proceso (reemplazar PID)
+taskkill /PID NUMERO_PID /F
+```
+
+**Linux/Mac**:
+```bash
+# Encontrar y terminar proceso
+lsof -ti:5000 | xargs kill -9
+```
+
+### Problema 5: Docker no inicia el contenedor
+
+**Solución**:
+```bash
+# Ver logs de error
+docker logs braille-app
+
+# Verificar que Docker Desktop está corriendo
+docker info
+
+# Reconstruir imagen
+docker rmi braille-transcriptor
+docker build -t braille-transcriptor .
+```
+
+### Problema 6: Página web no carga estilos
+
+**Causa**: Archivos estáticos no se encuentran
+
+**Solución**:
+```bash
+# Verificar estructura de carpetas
+ls src/static/css/
+ls src/static/js/
+
+# Si faltan archivos, verificar rama correcta
+git checkout main
+git pull origin main
+```
+
+### Problema 7: Error al generar PDF
+
+**Error**: "Error al generar señalética"
+
+**Solución**:
+```bash
+# Verificar instalación de reportlab
+pip show reportlab
+
+# Si no está instalado
+pip install reportlab==4.0.7
+
+# Verificar permisos de escritura
+# En Windows: deshabilitar antivirus temporalmente
+```
+
+---
+
+## 📞 Soporte Adicional
+
+Si después de seguir esta guía aún tienes problemas:
+
+1. **Revisar Issues en GitHub**:
+   - [Repositorio del Proyecto](https://github.com/DJoel07/Sistema-Transcripcion-Braille/issues)
+
+2. **Crear un Nuevo Issue**:
+   - Incluir: SO, versión de Python, logs de error, pasos para reproducir
+
+3. **Documentación Adicional**:
+   - [Manual de Usuario](../06-manual-usuario/guia-usuario.md)
+   - [Casos de Prueba](../04-casos-prueba/)
+
+---
+
+## 📝 Notas Finales
+
+- Para entornos de producción, considerar usar un servidor WSGI (gunicorn, uWSGI)
+- Cambiar `SECRET_KEY` en `.env` para producción
+- Configurar HTTPS para despliegues públicos
+- La carpeta `venv/` no debe subirse a Git (ya está en `.gitignore`)
+
+---
+
+**Última actualización**: 2025-11-17  
+**Versión del documento**: 1.0  
+**Mantenedor**: Equipo de Desarrollo
