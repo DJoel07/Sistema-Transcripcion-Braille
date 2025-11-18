@@ -1,0 +1,8 @@
+### Casos de Uso
+
+| ID | Caso de Uso | Actores | Descripción |
+| :--- | :--- | :--- | :--- |
+| **CU-001** | **Transcribir Texto Simple** | Usuario | El Usuario ingresa texto sin números ni signos. El sistema aplica las reglas del alfabeto Braille y muestra el resultado. |
+| **CU-002** | **Transcribir Texto con Números** | Usuario | El Usuario ingresa una cadena que contiene números (ej. "Piso 5"). El sistema aplica la regla del Signo de Número. |
+| **CU-003** | **Generar Archivo de Señalética** | Usuario | El Usuario revisa la transcripción y selecciona la opción para generar el documento imprimible. El sistema crea y ofrece la descarga del archivo vectorial (PDF/SVG). |
+| **CU-004** | **Gestión de Errores** | Usuario, Sistema | El Usuario introduce caracteres no soportados o no definidos para el alcance del Bimestre 1. El sistema informa al usuario que el carácter no puede ser transcrito. |

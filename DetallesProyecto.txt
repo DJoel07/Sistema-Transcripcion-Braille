@@ -1,0 +1,56 @@
+## Detalles y Requerimientos del Proyecto Transcriptor Braille (Python/Flask)
+
+### I. Objetivo, Producto y Alcance
+
+* **Objetivo General:** Desarrollar un producto de software que genere textos en el sistema de lectoescritura Braille.
+* **Producto:** Un software que permite transcribir textos a Braille y viceversa.
+* **Finalidad:** Que personas sin discapacidad puedan producir a bajo costo señalética o rotulación Braille para mejorar la accesibilidad.
+* **Alcance (Bimestre 1):** Transcribir textos de español a Braille, incluyendo números, abecedario, vocales acentuadas y signos básicos.
+
+### II. Requisitos Funcionales Detallados (Bimestre 1)
+
+**1. Mapeo de Alfabeto y Acentuadas:**
+
+El sistema debe implementar la lógica del Símbolo Generador (Cuadratín) de seis puntos.
+
+* **Primera Serie (a a j):** Mapeo de la primera serie matriz.
+    * *Ejemplos:* a (1), b (12), j (245).
+* **Segunda Serie (k a t):** Resulta de añadir el punto 3 a la Primera Serie.
+    * *Ejemplos:* k (13), o (135).
+* **Tercera Serie (u, v, x, y, z):** Resulta de añadir los puntos 3 y 6 a la Primera Serie.
+    * *Ejemplos:* u (136), z (1356).
+* **Letras Adicionales:** Implementar mapeo de ñ y w.
+* **Vocales Acentuadas:** Implementar mapeo de á, é, í, ó, ú, ü.
+
+**2. Mapeo de Números:**
+
+* Los dígitos (1-0) se obtienen anteponiendo el **Signo de Número** al patrón de la Primera Serie (a-j).
+* El Signo de Número se coloca solamente al principio para cantidades de dos o más cifras.
+* Los números se deben separar con espacios en blanco.
+
+**3. Mapeo de Signos Básicos:**
+
+* El sistema debe soportar la transcripción de signos como la coma, punto, punto y coma, dos puntos, signos de interrogación (¿?, ¡!) y paréntesis (()).
+
+**4. Generación de Señalética (Output):**
+
+* El software debe generar una representación de la señalética Braille a partir de textos.
+* **Implementación Sugerida:** Utilizar librerías de Python (como ReportLab para PDF o librerías de SVG) para generar un archivo de diseño vectorial de alta calidad, apto para impresión, que represente los puntos Braille en relieve junto al texto en tinta.
+
+### III. Requisitos No Funcionales y de Proceso (GitHub)
+
+**1. Estructura del Repositorio (GitHub):**
+
+* **Rama `main`:** Código en la versión estable.
+* **Rama `documentacion`:** Debe incluir obligatoriamente lo siguiente:
+    1.  Diseño Arquitectónico de Alto Nivel.
+    2.  Documentación del Ambiente de Desarrollo: Herramientas seleccionadas (Python, Flask, librerías) y flujo de trabajo.
+    3.  Documentación Técnica sobre el Código Fuente (usando *docstrings* tipo JavaDoc/Sphinx).
+    4.  Documentación de Casos de Prueba y Resultados (incluir análisis y solución si falla).
+    5.  Manual de Instalación.
+    6.  Manual de Usuario.
+
+**2. Flujo de Trabajo y Ramificación:**
+
+* **Restricción:** Prohibido desarrollar directamente en la rama `main`.
+* **Acción:** Se debe definir, documentar (en la rama `documentacion`) y aplicar una estrategia de ramificación (como GitFlow simplificado o *Feature Branch Workflow*).

@@ -1,0 +1,46 @@
+## 🐳 Requisito de Portabilidad y Dockerización
+
+Para garantizar que el proyecto se ejecute de manera consistente en cualquier entorno (desarrollo, pruebas o producción), es obligatorio que la aplicación sea portable mediante la contenedorización con **Docker**.
+
+### 1\. Archivos Clave para Dockerización
+
+Se deben añadir y mantener dos archivos principales en la raíz del proyecto para cumplir con la portabilidad.
+
+  * **`requirements.txt`**: Lista todas las dependencias exactas de Python que necesita el proyecto (Flask, ReportLab, etc.).
+
+      * *Propósito:* Asegurar que el entorno de Python dentro del contenedor sea idéntico al entorno de desarrollo.
+      * *Generación:* Usar el comando `pip freeze > requirements.txt` dentro del entorno virtual.
+
+  * **`Dockerfile`**: Contiene las instrucciones paso a paso que Docker usa para construir la imagen del contenedor.
+
+      * *Instrucción Clave:* Debe usar una imagen base de Python y contener el comando de inicio del servidor Flask.
+
+### 2\. Ajuste de Configuración del Servidor
+
+El servidor Flask debe configurarse para que sea accesible desde fuera del contenedor.
+
+  * **Host Requerido:** El comando de inicio debe especificar el host **`0.0.0.0`** en lugar del predeterminado `127.0.0.1` (localhost).
+  * **Puerto Requerido:** El `Dockerfile` debe exponer el puerto **5000**, que es el puerto por defecto de Flask.
+
+### 3\. Contenido Sugerido para `Dockerfile`
+
+```dockerfile
+# Usar una imagen base oficial de Python (python:3.11-slim es eficiente)
+FROM python:3.11-slim
+
+# Establecer el directorio de trabajo
+WORKDIR /usr/src/app
+
+# Copiar e instalar dependencias
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar el resto del código
+COPY . .
+
+# Exponer el puerto de Flask
+EXPOSE 5000
+
+# Comando de inicio: correr la aplicación en el host 0.0.0.0
+CMD ["python", "app.py", "--host", "0.0.0.0"]
+```

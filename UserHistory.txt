@@ -1,0 +1,8 @@
+### Historias de Usuario
+
+| ID | Historia de Usuario | Criterios de Aceptación |
+| :--- | :--- | :--- |
+| **HU-001** | Como **Usuario Proponente**, quiero introducir un texto en español para que el sistema me devuelva la transcripción completa en Braille. | El sistema transcribe correctamente **todas las letras** (a-z, ñ, w, acentuadas) según las reglas de las series. |
+| **HU-002** | Como **Usuario Proponente**, quiero transcribir números para poder producir señalética de conteo (ej. ascensores). | El sistema coloca el **Signo de Número** correctamente y respeta el mapeo numérico de la primera serie. |
+| **HU-003** | Como **Usuario Proponente**, quiero que se incluyan los signos de puntuación básicos para que la señalética sea gramaticalmente correcta. | Los signos de puntuación (coma, punto, etc.) se transcriben correctamente según el Braille Español. |
+| **HU-004** | Como **Usuario Proponente**, quiero generar un archivo listo para imprimir (ej. PDF) que contenga la transcripción Braille y el texto en tinta para producir la señalética. | Al hacer clic en "Generar Señalética", se descarga un archivo (ej. PDF/SVG) de alta calidad con el Braille y el texto original. |
