@@ -54,3 +54,6 @@ htmlcov/
 
 # Documentation builds
 docs/_build/
+
+# Documentacion folder (only in documentacion branch)
+documentacion/
