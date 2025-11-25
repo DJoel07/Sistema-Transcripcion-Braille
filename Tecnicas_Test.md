@@ -9,27 +9,28 @@ Este documento detalla las técnicas de prueba de caja negra y caja blanca aplic
 ## 📸 Evidencias Visuales
 
 ### Captura 1: Ejecución Completa de Tests
-![Ejecución de 61 tests](./screenshots/test_execution.png)
+<img width="837" height="619" alt="image" src="https://github.com/user-attachments/assets/e8c31f5a-be29-4e07-b7bf-61cf024ad121" />
 *Resultado de la ejecución completa de la suite de pruebas mostrando 61 tests pasando exitosamente.*
 
 ### Captura 2: Tests de Partición de Equivalencias
-![Tests de Partición de Equivalencias](./screenshots/particion_equivalencias.png)
+<img width="1093" height="905" alt="image" src="https://github.com/user-attachments/assets/cb181a5c-dbd2-4efe-9a37-1f120c5f73ff" />
 *Detalle de los 21 tests de la técnica de Partición de Equivalencias.*
 
 ### Captura 3: Tests de Valores Límite
-![Tests de Valores Límite](./screenshots/valores_limite.png)
+<img width="1104" height="299" alt="image" src="https://github.com/user-attachments/assets/3a97d775-6343-40a9-a1d9-64b2e4155871" />
 *Validación de casos límite (0, 1, 499, 500, 501 caracteres).*
 
 ### Captura 4: Tests de Robustez
-![Tests de Robustez](./screenshots/robustez.png)
+<img width="1099" height="887" alt="image" src="https://github.com/user-attachments/assets/d41af3c0-9718-48f8-a881-181023afaf6c" />
+
 *Pruebas con casos extremos: espacios múltiples, puntuación duplicada, caracteres inválidos.*
 
 ### Captura 5: Código del Motor de Transcripción
-![Código transcription_engine.py](./screenshots/codigo_motor.png)
+<img width="1910" height="3370" alt="image" src="https://github.com/user-attachments/assets/e897330c-19ed-490e-bbe1-5c692168b11d" />
 *Implementación del método `transcribe()` con todas las validaciones.*
 
 ### Captura 6: Método de Normalización de Espacios
-![Método _normalize_spaces](./screenshots/normalize_spaces.png)
+<img width="1248" height="1166" alt="image" src="https://github.com/user-attachments/assets/ed38d51e-2ba1-4072-a7bd-2b1287f9e584" />
 *Función que normaliza espacios múltiples y elimina espacios innecesarios.*
 
 ---
@@ -416,29 +417,28 @@ Todas las técnicas de prueba aplicadas garantizan un software **confiable, robu
 ## 📸 Evidencias Adicionales
 
 ### Captura 7: Aplicación Web en Ejecución
-![Aplicación Flask corriendo](<img width="1919" height="970" alt="image" src="https://github.com/user-attachments/assets/6ce5dda6-9447-4f8a-a78f-055d4e25c1a9" />)
-
+<img width="1919" height="970" alt="image" src="https://github.com/user-attachments/assets/6ce5dda6-9447-4f8a-a78f-055d4e25c1a9" />
 *Sistema de transcripción Braille ejecutándose en localhost:5000.*
 
 ### Captura 8: Interfaz de Usuario
-![Interfaz de la aplicación](<img width="1168" height="474" alt="image" src="https://github.com/user-attachments/assets/b59abce2-ce37-4bca-b22b-d30599a53883" />)
+<img width="1168" height="474" alt="image" src="https://github.com/user-attachments/assets/b59abce2-ce37-4bca-b22b-d30599a53883" />
 *Página principal mostrando el formulario de transcripción.*
 
 ### Captura 9: Ejemplo de Transcripción con Mayúsculas
-![Transcripción mayúsculas](<img width="1172" height="461" alt="image" src="https://github.com/user-attachments/assets/0f149f09-502c-4299-8750-8a1c499ec1d8" />)
+<img width="1172" height="461" alt="image" src="https://github.com/user-attachments/assets/0f149f09-502c-4299-8750-8a1c499ec1d8" />
 *Entrada "HOLA" transcrita correctamente a Braille.*
 
 ### Captura 10: Ejemplo de Transcripción con Acentos y Ñ
-![Transcripción acentos](<img width="1169" height="456" alt="image" src="https://github.com/user-attachments/assets/116017db-d7ca-4c7c-a59e-5879e537c785" />)
+<img width="1169" height="456" alt="image" src="https://github.com/user-attachments/assets/116017db-d7ca-4c7c-a59e-5879e537c785" />
 *Entrada "Asoma mañana también" con caracteres especiales.*
 
 ### Captura 11: Manejo de Números Decimales
-![Números decimales](<img width="1137" height="409" alt="image" src="https://github.com/user-attachments/assets/c56f6f22-fb06-4366-9139-f6368e2edf89" />)
+<img width="1137" height="409" alt="image" src="https://github.com/user-attachments/assets/c56f6f22-fb06-4366-9139-f6368e2edf89" />
 <img width="1145" height="432" alt="image" src="https://github.com/user-attachments/assets/d0078abc-f220-4cd3-99df-a1c57043bd79" />
 *Transcripción de "11.8" y "11,8" mostrando soporte para ambos separadores.*
 
 ### Captura 12: Validación de Errores
-![Mensajes de error](<img width="1133" height="369" alt="image" src="https://github.com/user-attachments/assets/71efdd64-6d0e-4a77-9276-82416566d0f3" />)
+<img width="1133" height="369" alt="image" src="https://github.com/user-attachments/assets/71efdd64-6d0e-4a77-9276-82416566d0f3" />
 <img width="1062" height="873" alt="image" src="https://github.com/user-attachments/assets/170e94a0-8588-4a65-9d72-8d9017278c1b" />
 
 *Mensaje de error cuando se intenta transcribir caracteres no soportados o exceder el límite.*
