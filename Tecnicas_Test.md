@@ -416,25 +416,29 @@ Todas las técnicas de prueba aplicadas garantizan un software **confiable, robu
 ## 📸 Evidencias Adicionales
 
 ### Captura 7: Aplicación Web en Ejecución
-![Aplicación Flask corriendo](./screenshots/app_running.png)
+![Aplicación Flask corriendo](<img width="1919" height="970" alt="image" src="https://github.com/user-attachments/assets/6ce5dda6-9447-4f8a-a78f-055d4e25c1a9" />)
+
 *Sistema de transcripción Braille ejecutándose en localhost:5000.*
 
 ### Captura 8: Interfaz de Usuario
-![Interfaz de la aplicación](./screenshots/interfaz_usuario.png)
+![Interfaz de la aplicación](<img width="1168" height="474" alt="image" src="https://github.com/user-attachments/assets/b59abce2-ce37-4bca-b22b-d30599a53883" />)
 *Página principal mostrando el formulario de transcripción.*
 
 ### Captura 9: Ejemplo de Transcripción con Mayúsculas
-![Transcripción mayúsculas](./screenshots/ejemplo_mayusculas.png)
+![Transcripción mayúsculas](<img width="1172" height="461" alt="image" src="https://github.com/user-attachments/assets/0f149f09-502c-4299-8750-8a1c499ec1d8" />)
 *Entrada "HOLA" transcrita correctamente a Braille.*
 
 ### Captura 10: Ejemplo de Transcripción con Acentos y Ñ
-![Transcripción acentos](./screenshots/ejemplo_acentos.png)
-*Entrada "mañana información" con caracteres especiales.*
+![Transcripción acentos](<img width="1169" height="456" alt="image" src="https://github.com/user-attachments/assets/116017db-d7ca-4c7c-a59e-5879e537c785" />)
+*Entrada "Asoma mañana también" con caracteres especiales.*
 
 ### Captura 11: Manejo de Números Decimales
-![Números decimales](./screenshots/ejemplo_decimales.png)
-*Transcripción de "12.5" y "12,5" mostrando soporte para ambos separadores.*
+![Números decimales](<img width="1137" height="409" alt="image" src="https://github.com/user-attachments/assets/c56f6f22-fb06-4366-9139-f6368e2edf89" />)
+<img width="1145" height="432" alt="image" src="https://github.com/user-attachments/assets/d0078abc-f220-4cd3-99df-a1c57043bd79" />
+*Transcripción de "11.8" y "11,8" mostrando soporte para ambos separadores.*
 
 ### Captura 12: Validación de Errores
-![Mensajes de error](./screenshots/validacion_errores.png)
+![Mensajes de error](<img width="1133" height="369" alt="image" src="https://github.com/user-attachments/assets/71efdd64-6d0e-4a77-9276-82416566d0f3" />)
+<img width="1062" height="873" alt="image" src="https://github.com/user-attachments/assets/170e94a0-8588-4a65-9d72-8d9017278c1b" />
+
 *Mensaje de error cuando se intenta transcribir caracteres no soportados o exceder el límite.*
