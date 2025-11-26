@@ -43,6 +43,8 @@ const elements = {
 document.addEventListener('DOMContentLoaded', () => {
     initializeElements();
     attachEventListeners();
+    initializeTheme();
+    addAnimations();
 });
 
 /**
@@ -71,6 +73,12 @@ function attachEventListeners() {
     elements.clearBtn.addEventListener('click', handleClear);
     elements.generatePdfBtn.addEventListener('click', handleGeneratePdf);
     elements.copyBrailleBtn.addEventListener('click', handleCopyBraille);
+    
+    // Event listener para cambio de tema
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
 }
 
 /**
@@ -327,4 +335,49 @@ function setButtonLoading(button, isLoading) {
         button.textContent = button.dataset.originalText || button.textContent;
         button.classList.remove('loading');
     }
+}
+
+/**
+ * Inicializa el tema de la aplicación
+ */
+function initializeTheme() {
+    // Verificar si hay tema guardado en localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeToggleButton(savedTheme);
+}
+
+/**
+ * Alterna entre tema claro y oscuro
+ */
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeToggleButton(newTheme);
+}
+
+/**
+ * Actualiza el texto del botón de cambio de tema
+ * @param {string} theme - Tema actual ('light' o 'dark')
+ */
+function updateThemeToggleButton(theme) {
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+    }
+}
+
+/**
+ * Agrega animaciones a los elementos de la página
+ */
+function addAnimations() {
+    // Agregar animación fade-in a las cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('fade-in');
+    });
 }

@@ -1,14 +1,18 @@
 # Sistema de Transcripción Braille 🔤
 
-Sistema web desarrollado en Python/Flask para transcribir textos en español a Braille y generar señalética imprimible de alta calidad.
+> **Desarrollado por GR2 - Construcción y Validación de Software**
 
-## 📋 Características
+Sistema web moderno desarrollado en Python/Flask para transcribir textos en español a Braille y generar señalética imprimible de alta calidad.
+
+## ✨ Características Destacadas
 
 - **Transcripción completa**: Soporta el alfabeto español completo (a-z, ñ, w), vocales acentuadas (á, é, í, ó, ú, ü), números (0-9) y signos de puntuación básicos
 - **Generación de PDF**: Crea documentos vectoriales listos para imprimir con representación visual del Braille
-- **Interfaz intuitiva**: Diseño web responsive y accesible
+- **Interfaz moderna**: Diseño web responsive con gradientes dinámicos y animaciones suaves
+- **🌙 Modo Oscuro**: Cambia entre temas claro y oscuro con persistencia local
 - **Arquitectura limpia**: Implementa el patrón de arquitectura de 3 capas
 - **Dockerizado**: Completamente portable mediante contenedores Docker
+- **Accesible**: Diseño inclusivo siguiendo estándares WCAG
 
 ## 🏗️ Arquitectura
 
