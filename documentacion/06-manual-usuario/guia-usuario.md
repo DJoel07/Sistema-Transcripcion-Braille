@@ -326,7 +326,7 @@ info empresa.com
 ✅ **SÍ HACER**:
 - Usar texto claro y conciso
 - Revisar ortografía antes de transcribir
-- Usar mayúsculas solo al inicio (se normalizan automáticamente)
+- Las mayúsculas se preservan con el indicador ⠨ (v2.1.0+)
 - Dividir textos largos en múltiples transcripciones
 - Probar la transcripción antes de imprimir en masa
 
@@ -425,8 +425,8 @@ R: Sí, la interfaz es responsive y funciona en móviles.
 
 ### Sobre la Transcripción
 
-**P: ¿Por qué mis mayúsculas se convierten a minúsculas?**  
-R: En Braille español básico, las mayúsculas y minúsculas no se diferencian en este nivel. Para mayúsculas se usaría un signo especial (no implementado en v1.0).
+**P: ¿Cómo se representan las mayúsculas en Braille?**  
+R: Desde la versión 2.1.0, el sistema implementa el indicador de mayúsculas (⠨ - puntos 4,6) según las reglas oficiales del Braille español. Cada letra mayúscula va precedida por este indicador. Por ejemplo: "Hola" → "⠨⠓⠕⠇⠁" y "HOLA" → "⠨⠓⠨⠕⠨⠇⠨⠁".
 
 **P: ¿Puedo transcribir texto en inglés?**  
 R: Algunos caracteres funcionarán, pero el sistema está optimizado para español. Caracteres exclusivos del inglés (como la 'w' en ciertas posiciones) pueden no transcribirse correctamente según el contexto.
@@ -862,19 +862,19 @@ Transcripción: ⠞⠕⠍⠁⠗ ⠉⠁⠙⠁ ⠼⠓ ⠓⠕⠗⠁⠎
 
 ---
 
-### Error 4: Mayúsculas Innecesarias
+### Error 4: Uso de Mayúsculas
 
-**Entrada**:
+**Entrada correcta**:
 ```
-"SALIDA DE EMERGENCIA"
-```
-
-**Sistema normaliza**:
-```
-"salida de emergencia" → ⠎⠁⠇⠊⠙⠁ ⠙⠑ ⠑⠍⠑⠗⠛⠑⠝⠉⠊⠁
+"Salida de Emergencia"
 ```
 
-**Nota**: En Braille español básico no se diferencian mayúsculas y minúsculas. El sistema convierte todo a minúsculas.
+**Resultado (v2.1.0+)**:
+```
+⠨⠎⠁⠇⠊⠙⠁ ⠙⠑ ⠨⠑⠍⠑⠗⠛⠑⠝⠉⠊⠁
+```
+
+**Nota**: Desde v2.1.0, el sistema preserva las mayúsculas usando el indicador ⠨ (puntos 4,6). Cada letra mayúscula va precedida por este símbolo según las reglas oficiales del Braille español.
 
 ---
 

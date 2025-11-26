@@ -55,9 +55,10 @@ Salida: "⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠭�
 - Tercera (u-z): `⠥⠧⠭⠽⠵`
 - Adicionales (ñ, w): `⠻⠺`
 
-### Caso 2 y 3: Normalización a Minúsculas
+### Caso 2 y 3: Preservación de Mayúsculas (v2.1.0+)
 ```
-Salida: Mismo resultado que Caso 1 (el sistema normaliza a minúsculas)
+HOLA: ⠨⠓⠨⠕⠨⠇⠨⠁  (cada mayúscula con indicador ⠨)
+Hola: ⠨⠓⠕⠇⠁  (solo la 'H' con indicador ⠨)
 ```
 
 ## 🔧 Configuración del Ambiente

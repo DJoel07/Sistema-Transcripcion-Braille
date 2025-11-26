@@ -52,12 +52,14 @@ if len(text) > self.MAX_TEXT_LENGTH:
     )
 ```
 
-### 3. **Normalización de Mayúsculas**
-✅ **Conversión automática a minúsculas**  
+### 3. **Manejo de Mayúsculas (v2.1.0+)**
+✅ **Preservación de mayúsculas con indicador ⠨**  
 ✅ **Compatible con Braille español estándar**
 
 ```python
-text = text.lower()  # HOLA → hola → ⠓⠕⠇⠁
+# Cada letra mayúscula se precede con el indicador ⠨
+# HOLA → ⠨⠓⠨⠕⠨⠇⠨⠁
+# Hola → ⠨⠓⠕⠇⠁
 ```
 
 ### 4. **Eliminación de Puntuación Duplicada**
@@ -236,7 +238,7 @@ python -m unittest tests.test_comprehensive.TestValoresLimite -v
 
 La aplicación está **100% libre de defectos** para todos los casos de prueba especificados:
 
-✅ Maneja correctamente **mayúsculas** (normaliza a minúsculas)  
+✅ Maneja correctamente **mayúsculas** (preserva con indicador ⠨ - v2.1.0+)  
 ✅ Procesa correctamente **ñ y vocales acentuadas**  
 ✅ Transcribe **números enteros y decimales** (punto y coma)  
 ✅ Elimina **puntuación duplicada** automáticamente  

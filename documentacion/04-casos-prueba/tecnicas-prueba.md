@@ -65,9 +65,13 @@ Salida esperada: "⠓⠕⠇⠁"
 Entrada: "información"
 Salida esperada: "⠊⠝⠋⠕⠗⠍⠁⠉⠌⠬⠝"
 
-# CE3: Mayúsculas (se normalizan a minúsculas)
+# CE3: Mayúsculas (con indicador ⠨)
 Entrada: "HOLA"
-Salida esperada: "⠓⠕⠇⠁"
+Salida esperada: "⠨⠓⠨⠕⠨⠇⠨⠁"  # Cada letra con indicador de mayúscula
+
+# CE3b: Mayúscula inicial
+Entrada: "Hola"
+Salida esperada: "⠨⠓⠕⠇⠁"  # Solo primera letra con indicador
 
 # CE4: Números enteros
 Entrada: "123"
@@ -279,12 +283,13 @@ Objetivo: Ejecutar todos los caminos posibles a través del código.
 "¿ hola" → "¿hola"
 ```
 
-### 2. **Normalización de Mayúsculas**
+### 2. **Manejo de Mayúsculas (v2.1.0+)**
 
 ```python
-# Todas las mayúsculas se convierten a minúsculas
-"HOLA" → "hola" → "⠓⠕⠇⠁"
-"HoLa" → "hola" → "⠓⠕⠇⠁"
+# Las mayúsculas se preservan con indicador ⠨ (puntos 4,6)
+"HOLA" → "⠨⠓⠨⠕⠨⠇⠨⠁"  # Todas con indicador
+"Hola" → "⠨⠓⠕⠇⠁"          # Solo primera con indicador
+"HoLa" → "⠨⠓⠕⠨⠇⠁"        # H y L con indicador
 ```
 
 ### 3. **Eliminación de Puntuación Duplicada**
@@ -339,13 +344,13 @@ MAX_TEXT_LENGTH = 500
 | CP-003-02 | "ü" | "⠳" | PE: Diéresis |
 | CP-003-03 | "información" | "⠊⠝⠋⠕⠗⠍⠁⠉⠌⠬⠝" | PE: Palabra con acentos |
 
-### Suite CP-004: Mayúsculas
+### Suite CP-004: Mayúsculas (v2.1.0+)
 
 | ID | Entrada | Salida Esperada | Técnica |
-|----|---------|-----------------|---------|
-| CP-004-01 | "HOLA" | "⠓⠕⠇⠁" | PE: Todo mayúsculas |
-| CP-004-02 | "HoLa" | "⠓⠕⠇⠁" | PE: Mezcla may/min |
-| CP-004-03 | "Hola Mundo" | "⠓⠕⠇⠁ ⠍⠥⠝⠙⠕" | PE: Mayúsculas iniciales |
+|----|---------|-----------------|---------||
+| CP-004-01 | "HOLA" | "⠨⠓⠨⠕⠨⠇⠨⠁" | PE: Todo mayúsculas |
+| CP-004-02 | "HoLa" | "⠨⠓⠕⠨⠇⠁" | PE: Mezcla may/min |
+| CP-004-03 | "Hola Mundo" | "⠨⠓⠕⠇⠁ ⠨⠍⠥⠝⠙⠕" | PE: Mayúsculas iniciales |
 
 ### Suite CP-005: Espacios Múltiples
 
