@@ -62,44 +62,47 @@ class TestParticionEquivalencias(unittest.TestCase):
     def test_mayusculas_todas(self):
         """CP-004-01: Texto completamente en mayúsculas."""
         result = self.engine.transcribe("HOLA")
-        self.assertEqual(result, "⠓⠕⠇⠁")
+        # Cada letra mayúscula debe llevar el indicador capital (⠨) antes
+        self.assertEqual(result, "⠨⠓⠨⠕⠨⠇⠨⠁")
     
     def test_mayusculas_mezcladas(self):
         """CP-004-02: Mayúsculas y minúsculas mezcladas."""
         result = self.engine.transcribe("HoLa")
-        self.assertEqual(result, "⠓⠕⠇⠁")
+        # H y L mayúsculas llevan indicador (⠨), o y a minúsculas no
+        self.assertEqual(result, "⠨⠓⠕⠨⠇⠁")
     
     def test_mayusculas_iniciales(self):
         """CP-004-03: Mayúsculas solo al inicio de palabras."""
         result = self.engine.transcribe("Hola Mundo")
-        self.assertEqual(result, "⠓⠕⠇⠁ ⠍⠥⠝⠙⠕")
+        # H y M mayúsculas llevan indicador (⠨)
+        self.assertEqual(result, "⠨⠓⠕⠇⠁ ⠨⠍⠥⠝⠙⠕")
     
     # === CE4: Números ===
     def test_numero_entero_simple(self):
         """CP-002-01: Número entero simple."""
         result = self.engine.transcribe("123")
-        self.assertEqual(result, "⠼⠁⠃⠉")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠉")
     
     def test_numero_cero(self):
         """CP-002-04: Número cero."""
         result = self.engine.transcribe("0")
-        self.assertEqual(result, "⠼⠚")
+        self.assertEqual(result, "⠼ ⠚")
     
     def test_numero_todos_digitos(self):
         """CP-002-05: Todos los dígitos 0-9."""
         result = self.engine.transcribe("0123456789")
-        self.assertEqual(result, "⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊")
+        self.assertEqual(result, "⠼ ⠚ ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊")
     
     # === CE5: Números decimales ===
     def test_numero_decimal_punto(self):
         """CP-002-02: Número decimal con punto."""
         result = self.engine.transcribe("12.5")
-        self.assertEqual(result, "⠼⠁⠃⠲⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠲ ⠑")
     
     def test_numero_decimal_coma(self):
         """CP-002-03: Número decimal con coma."""
         result = self.engine.transcribe("12,5")
-        self.assertEqual(result, "⠼⠁⠃⠂⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠂ ⠑")
     
     # === CE6: Puntuación ===
     def test_puntuacion_basica(self):
@@ -252,13 +255,13 @@ class TestRobustez(unittest.TestCase):
     def test_mezcla_compleja(self):
         """ROB-10: Mezcla compleja de letras, números y puntuación."""
         result = self.engine.transcribe("Información123, ¿verdad?")
-        # Información con í sin acento especial + ó con acento
-        self.assertEqual(result, "⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼⠁⠃⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
+        # I mayúscula lleva indicador (⠨), luego información con ó acentuada
+        self.assertEqual(result, "⠨⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼ ⠁ ⠃ ⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
     
     def test_solo_numeros(self):
         """ROB-08: Solo números sin texto."""
         result = self.engine.transcribe("12345")
-        self.assertEqual(result, "⠼⠁⠃⠉⠙⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠉ ⠙ ⠑")
     
     def test_palabra_con_enie(self):
         """ROB-11: Palabra con ñ."""
@@ -268,7 +271,8 @@ class TestRobustez(unittest.TestCase):
     def test_oracion_completa(self):
         """ROB-12: Oración completa con puntuación."""
         result = self.engine.transcribe("Hola, ¿cómo estás?")
-        self.assertEqual(result, "⠓⠕⠇⠁⠂ ⠢⠉⠬⠍⠕ ⠑⠎⠞⠷⠎⠦")
+        # H mayúscula lleva indicador (⠨)
+        self.assertEqual(result, "⠨⠓⠕⠇⠁⠂ ⠢⠉⠬⠍⠕ ⠑⠎⠞⠷⠎⠦")
 
 
 class TestMetodosValidacion(unittest.TestCase):

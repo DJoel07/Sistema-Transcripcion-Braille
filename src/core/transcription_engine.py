@@ -23,6 +23,7 @@ class BrailleTranscriptionEngine:
         self._numbers = BrailleMappings.get_number_mapping()
         self._punctuation = BrailleMappings.get_punctuation_mapping()
         self._number_sign = BrailleMappings.NUMBER_SIGN
+        self._capital_sign = BrailleMappings.CAPITAL_SIGN
     
     def transcribe(self, text: str) -> str:
         """
@@ -32,6 +33,10 @@ class BrailleTranscriptionEngine:
         - Partición de Equivalencias: Letras (a-z), números (0-9), puntuación, acentos
         - Análisis de Valores Límite: Texto vacío, longitud máxima (500 caracteres)
         - Pruebas de Robustez: Múltiples espacios, puntuación duplicada, mayúsculas
+        
+        Mayúsculas en Braille:
+        - Se indica con el signo ⠨ (puntos 4,6) antes de la letra
+        - Ejemplo: "Hola" → "⠨⠓⠕⠇⠁"
         
         Args:
             text (str): Texto en español a transcribir
@@ -59,9 +64,6 @@ class BrailleTranscriptionEngine:
         # Normalización: Reducir múltiples espacios consecutivos a uno solo
         text = self._normalize_spaces(text)
         
-        # Normalización: Convertir mayúsculas a minúsculas (Braille español estándar)
-        text = text.lower()
-        
         # Validación 3: Verificar caracteres no soportados antes de procesar
         unsupported = self.get_unsupported_characters(text)
         if unsupported:
@@ -82,9 +84,13 @@ class BrailleTranscriptionEngine:
                 i += digits_processed
                 continue
             
-            # Procesar letras (ya normalizadas a minúsculas)
-            if char in self._alphabet:
-                result_chars.append(self._alphabet[char])
+            # Procesar letras (manteniendo mayúsculas)
+            char_lower = char.lower()
+            if char_lower in self._alphabet:
+                # Si es mayúscula, agregar el signo de mayúscula antes
+                if char.isupper():
+                    result_chars.append(self._capital_sign)
+                result_chars.append(self._alphabet[char_lower])
             # Procesar signos de puntuación
             elif char in self._punctuation:
                 # Evitar puntuación duplicada consecutiva (excepto espacios)
@@ -135,9 +141,9 @@ class BrailleTranscriptionEngine:
         Procesa una secuencia de números según las reglas Braille.
         
         Maneja:
-        - Números enteros: 123 → ⠼⠁⠃⠉
-        - Números con punto decimal: 12.5 → ⠼⠁⠃⠲⠑
-        - Números con coma decimal: 12,5 → ⠼⠁⠃⠂⠑
+        - Números enteros: 123 → ⠼ ⠁ ⠃ ⠉ (con espacios entre dígitos)
+        - Números con punto decimal: 12.5 → ⠼ ⠁ ⠃ ⠲ ⠑
+        - Números con coma decimal: 12,5 → ⠼ ⠁ ⠃ ⠂ ⠑
         
         Args:
             text (str): Texto completo
@@ -155,12 +161,14 @@ class BrailleTranscriptionEngine:
             
             # Procesar dígitos
             if char.isdigit():
+                braille_numbers.append(' ')  # Espacio antes de cada dígito
                 braille_numbers.append(self._numbers[char])
                 digits_processed += 1
                 i += 1
             # Procesar separadores decimales (punto o coma)
             elif char in ['.', ','] and i + 1 < len(text) and text[i + 1].isdigit():
                 # Verificar que hay un dígito después del separador
+                braille_numbers.append(' ')  # Espacio antes del separador
                 braille_numbers.append(self._punctuation[char])
                 digits_processed += 1
                 i += 1

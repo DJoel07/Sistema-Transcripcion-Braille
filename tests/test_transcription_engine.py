@@ -66,7 +66,7 @@ class TestBrailleTranscriptionEngine(unittest.TestCase):
     def test_transcribe_single_digit(self):
         """Test transcripción de un solo dígito."""
         text = "5"
-        expected = "⠼⠑"  # Signo de número + patrón de 'e'
+        expected = "⠼ ⠑"  # Signo de número + espacio + patrón de 'e'
         
         result = self.engine.transcribe(text)
         
@@ -75,7 +75,7 @@ class TestBrailleTranscriptionEngine(unittest.TestCase):
     def test_transcribe_multiple_digits(self):
         """Test transcripción de múltiples dígitos."""
         text = "123"
-        expected = "⠼⠁⠃⠉"  # Signo de número + abc
+        expected = "⠼ ⠁ ⠃ ⠉"  # Signo de número + espacios + abc
         
         result = self.engine.transcribe(text)
         
@@ -114,15 +114,28 @@ class TestBrailleTranscriptionEngine(unittest.TestCase):
         
         self.assertEqual(result, expected)
     
-    def test_transcribe_uppercase_to_lowercase(self):
-        """Test que mayúsculas se convierten a minúsculas."""
+    def test_transcribe_uppercase_with_capital_indicator(self):
+        """Test que mayúsculas se transcriben con el indicador capital (⠨)."""
+        # Minúsculas sin indicador
         text_lower = "hola"
-        text_upper = "HOLA"
-        
+        expected_lower = "⠓⠕⠇⠁"
         result_lower = self.engine.transcribe(text_lower)
-        result_upper = self.engine.transcribe(text_upper)
+        self.assertEqual(result_lower, expected_lower)
         
-        self.assertEqual(result_lower, result_upper)
+        # Todo en mayúsculas con indicador antes de cada letra
+        text_upper = "HOLA"
+        expected_upper = "⠨⠓⠨⠕⠨⠇⠨⠁"
+        result_upper = self.engine.transcribe(text_upper)
+        self.assertEqual(result_upper, expected_upper)
+        
+        # Caso mixto: primera letra mayúscula
+        text_mixed = "Hola"
+        expected_mixed = "⠨⠓⠕⠇⠁"
+        result_mixed = self.engine.transcribe(text_mixed)
+        self.assertEqual(result_mixed, expected_mixed)
+        
+        # Verificar que lowercase y uppercase son diferentes
+        self.assertNotEqual(result_lower, result_upper)
     
     def test_unsupported_character_raises_error(self):
         """Test que caracteres no soportados lanzan error."""
