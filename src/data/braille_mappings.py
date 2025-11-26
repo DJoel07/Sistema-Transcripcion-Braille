@@ -19,6 +19,9 @@ class BrailleMappings:
     # Signo especial para números
     NUMBER_SIGN: str = "⠼"
     
+    # Signo especial para mayúsculas (puntos 4,6)
+    CAPITAL_SIGN: str = "⠨"
+    
     # Primera Serie (a-j): Puntos 1,2,4,5
     _FIRST_SERIES: Dict[str, str] = {
         'a': '⠁',  # punto 1

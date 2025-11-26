@@ -62,17 +62,20 @@ class TestParticionEquivalencias(unittest.TestCase):
     def test_mayusculas_todas(self):
         """CP-004-01: Texto completamente en mayúsculas."""
         result = self.engine.transcribe("HOLA")
-        self.assertEqual(result, "⠓⠕⠇⠁")
+        # Cada letra mayúscula debe llevar el indicador capital (⠨) antes
+        self.assertEqual(result, "⠨⠓⠨⠕⠨⠇⠨⠁")
     
     def test_mayusculas_mezcladas(self):
         """CP-004-02: Mayúsculas y minúsculas mezcladas."""
         result = self.engine.transcribe("HoLa")
-        self.assertEqual(result, "⠓⠕⠇⠁")
+        # H y L mayúsculas llevan indicador (⠨), o y a minúsculas no
+        self.assertEqual(result, "⠨⠓⠕⠨⠇⠁")
     
     def test_mayusculas_iniciales(self):
         """CP-004-03: Mayúsculas solo al inicio de palabras."""
         result = self.engine.transcribe("Hola Mundo")
-        self.assertEqual(result, "⠓⠕⠇⠁ ⠍⠥⠝⠙⠕")
+        # H y M mayúsculas llevan indicador (⠨)
+        self.assertEqual(result, "⠨⠓⠕⠇⠁ ⠨⠍⠥⠝⠙⠕")
     
     # === CE4: Números ===
     def test_numero_entero_simple(self):
@@ -252,8 +255,8 @@ class TestRobustez(unittest.TestCase):
     def test_mezcla_compleja(self):
         """ROB-10: Mezcla compleja de letras, números y puntuación."""
         result = self.engine.transcribe("Información123, ¿verdad?")
-        # Información con í sin acento especial + ó con acento
-        self.assertEqual(result, "⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼⠁⠃⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
+        # I mayúscula lleva indicador (⠨), luego información con ó acentuada
+        self.assertEqual(result, "⠨⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼⠁⠃⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
     
     def test_solo_numeros(self):
         """ROB-08: Solo números sin texto."""
@@ -268,7 +271,8 @@ class TestRobustez(unittest.TestCase):
     def test_oracion_completa(self):
         """ROB-12: Oración completa con puntuación."""
         result = self.engine.transcribe("Hola, ¿cómo estás?")
-        self.assertEqual(result, "⠓⠕⠇⠁⠂ ⠢⠉⠬⠍⠕ ⠑⠎⠞⠷⠎⠦")
+        # H mayúscula lleva indicador (⠨)
+        self.assertEqual(result, "⠨⠓⠕⠇⠁⠂ ⠢⠉⠬⠍⠕ ⠑⠎⠞⠷⠎⠦")
 
 
 class TestMetodosValidacion(unittest.TestCase):
