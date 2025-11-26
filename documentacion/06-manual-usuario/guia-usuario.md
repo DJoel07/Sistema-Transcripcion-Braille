@@ -658,18 +658,18 @@ u=⠥  v=⠧  x=⠭  y=⠽  z=⠵
 
 ### Proceso de Transcripción
 
-<img width="974" height="902" alt="image" src="https://github.com/user-attachments/assets/051a6f6e-de63-46da-826e-c0d016614cb2" />
+<img width="1115" height="896" alt="image" src="https://github.com/user-attachments/assets/c95c3dc4-b6b1-4fa2-8b5f-fbe8eda519be" />
 *Figura 2: Aplicación procesando texto ingresado*
 
 ### Resultado de Transcripción
 
-<img width="1415" height="558" alt="image" src="https://github.com/user-attachments/assets/e9224b33-c936-4ac3-b7a4-673c3894489d" />
+<img width="1127" height="443" alt="image" src="https://github.com/user-attachments/assets/eec39f48-e1a9-4740-9390-45f48ccbce2e" />
 *Figura 3: Texto original y transcripción Braille mostrados*
 
 
 ### Ejemplos de Señalética Impresa
 
-<img width="1026" height="189" alt="image" src="https://github.com/user-attachments/assets/17ee5229-7255-471f-abc0-c6450fc48f8f" />
+<img width="880" height="204" alt="image" src="https://github.com/user-attachments/assets/6b5921c8-a713-4fbb-8278-8943047bd7c0" />
 *Figura 4: Ejemplos de señalética impresa y aplicada*
 
 ---
