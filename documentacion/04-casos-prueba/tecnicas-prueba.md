@@ -430,11 +430,11 @@ Todas las técnicas de prueba aplicadas garantizan un software **confiable, robu
 *Página principal mostrando el formulario de transcripción.*
 
 ### Captura 9: Ejemplo de Transcripción con Mayúsculas
-<img width="1172" height="461" alt="image" src="https://github.com/user-attachments/assets/0f149f09-502c-4299-8750-8a1c499ec1d8" />
+<img width="1456" height="590" alt="image" src="https://github.com/user-attachments/assets/f55de2ea-818f-4bc7-974b-eb7114393977" />
 *Entrada "HOLA" transcrita correctamente a Braille.*
 
 ### Captura 10: Ejemplo de Transcripción con Acentos y Ñ
-<img width="1169" height="456" alt="image" src="https://github.com/user-attachments/assets/116017db-d7ca-4c7c-a59e-5879e537c785" />
+<img width="1434" height="582" alt="image" src="https://github.com/user-attachments/assets/f14f9700-18a4-4e10-a997-9330aeb1fb7f" />
 *Entrada "Asoma mañana también" con caracteres especiales.*
 
 ### Captura 11: Manejo de Números Decimales
