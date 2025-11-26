@@ -141,9 +141,9 @@ class BrailleTranscriptionEngine:
         Procesa una secuencia de números según las reglas Braille.
         
         Maneja:
-        - Números enteros: 123 → ⠼⠁⠃⠉
-        - Números con punto decimal: 12.5 → ⠼⠁⠃⠲⠑
-        - Números con coma decimal: 12,5 → ⠼⠁⠃⠂⠑
+        - Números enteros: 123 → ⠼ ⠁ ⠃ ⠉ (con espacios entre dígitos)
+        - Números con punto decimal: 12.5 → ⠼ ⠁ ⠃ ⠲ ⠑
+        - Números con coma decimal: 12,5 → ⠼ ⠁ ⠃ ⠂ ⠑
         
         Args:
             text (str): Texto completo
@@ -161,12 +161,14 @@ class BrailleTranscriptionEngine:
             
             # Procesar dígitos
             if char.isdigit():
+                braille_numbers.append(' ')  # Espacio antes de cada dígito
                 braille_numbers.append(self._numbers[char])
                 digits_processed += 1
                 i += 1
             # Procesar separadores decimales (punto o coma)
             elif char in ['.', ','] and i + 1 < len(text) and text[i + 1].isdigit():
                 # Verificar que hay un dígito después del separador
+                braille_numbers.append(' ')  # Espacio antes del separador
                 braille_numbers.append(self._punctuation[char])
                 digits_processed += 1
                 i += 1

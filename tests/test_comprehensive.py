@@ -81,28 +81,28 @@ class TestParticionEquivalencias(unittest.TestCase):
     def test_numero_entero_simple(self):
         """CP-002-01: Número entero simple."""
         result = self.engine.transcribe("123")
-        self.assertEqual(result, "⠼⠁⠃⠉")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠉")
     
     def test_numero_cero(self):
         """CP-002-04: Número cero."""
         result = self.engine.transcribe("0")
-        self.assertEqual(result, "⠼⠚")
+        self.assertEqual(result, "⠼ ⠚")
     
     def test_numero_todos_digitos(self):
         """CP-002-05: Todos los dígitos 0-9."""
         result = self.engine.transcribe("0123456789")
-        self.assertEqual(result, "⠼⠚⠁⠃⠉⠙⠑⠋⠛⠓⠊")
+        self.assertEqual(result, "⠼ ⠚ ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊")
     
     # === CE5: Números decimales ===
     def test_numero_decimal_punto(self):
         """CP-002-02: Número decimal con punto."""
         result = self.engine.transcribe("12.5")
-        self.assertEqual(result, "⠼⠁⠃⠲⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠲ ⠑")
     
     def test_numero_decimal_coma(self):
         """CP-002-03: Número decimal con coma."""
         result = self.engine.transcribe("12,5")
-        self.assertEqual(result, "⠼⠁⠃⠂⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠂ ⠑")
     
     # === CE6: Puntuación ===
     def test_puntuacion_basica(self):
@@ -256,12 +256,12 @@ class TestRobustez(unittest.TestCase):
         """ROB-10: Mezcla compleja de letras, números y puntuación."""
         result = self.engine.transcribe("Información123, ¿verdad?")
         # I mayúscula lleva indicador (⠨), luego información con ó acentuada
-        self.assertEqual(result, "⠨⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼⠁⠃⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
+        self.assertEqual(result, "⠨⠊⠝⠋⠕⠗⠍⠁⠉⠊⠬⠝⠼ ⠁ ⠃ ⠉⠂ ⠢⠧⠑⠗⠙⠁⠙⠦")
     
     def test_solo_numeros(self):
         """ROB-08: Solo números sin texto."""
         result = self.engine.transcribe("12345")
-        self.assertEqual(result, "⠼⠁⠃⠉⠙⠑")
+        self.assertEqual(result, "⠼ ⠁ ⠃ ⠉ ⠙ ⠑")
     
     def test_palabra_con_enie(self):
         """ROB-11: Palabra con ñ."""

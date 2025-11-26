@@ -66,7 +66,7 @@ class TestBrailleTranscriptionEngine(unittest.TestCase):
     def test_transcribe_single_digit(self):
         """Test transcripción de un solo dígito."""
         text = "5"
-        expected = "⠼⠑"  # Signo de número + patrón de 'e'
+        expected = "⠼ ⠑"  # Signo de número + espacio + patrón de 'e'
         
         result = self.engine.transcribe(text)
         
@@ -75,7 +75,7 @@ class TestBrailleTranscriptionEngine(unittest.TestCase):
     def test_transcribe_multiple_digits(self):
         """Test transcripción de múltiples dígitos."""
         text = "123"
-        expected = "⠼⠁⠃⠉"  # Signo de número + abc
+        expected = "⠼ ⠁ ⠃ ⠉"  # Signo de número + espacios + abc
         
         result = self.engine.transcribe(text)
         
