@@ -653,28 +653,24 @@ u=⠥  v=⠧  x=⠭  y=⠽  z=⠵
 
 ### Interfaz Principal
 
-![Pantalla Principal](capturas/01-pantalla-principal.png)
+<img width="1902" height="915" alt="image" src="https://github.com/user-attachments/assets/0f56fcf7-a1ce-48d0-b770-f1afc0026093" />
 *Figura 1: Vista principal de la aplicación con campo de entrada*
 
 ### Proceso de Transcripción
 
-![Proceso de Transcripción](capturas/02-transcribiendo.png)
+<img width="974" height="902" alt="image" src="https://github.com/user-attachments/assets/051a6f6e-de63-46da-826e-c0d016614cb2" />
 *Figura 2: Aplicación procesando texto ingresado*
 
 ### Resultado de Transcripción
 
-![Resultado](capturas/03-resultado.png)
+<img width="1415" height="558" alt="image" src="https://github.com/user-attachments/assets/e9224b33-c936-4ac3-b7a4-673c3894489d" />
 *Figura 3: Texto original y transcripción Braille mostrados*
 
-### Generación de PDF
-
-![PDF Generado](capturas/04-pdf-preview.png)
-*Figura 4: Vista previa del PDF generado con señalética*
 
 ### Ejemplos de Señalética Impresa
 
-![Señalética Impresa](capturas/05-senaletica-real.png)
-*Figura 5: Ejemplos de señalética impresa y aplicada*
+<img width="1026" height="189" alt="image" src="https://github.com/user-attachments/assets/17ee5229-7255-471f-abc0-c6450fc48f8f" />
+*Figura 4: Ejemplos de señalética impresa y aplicada*
 
 ---
 
