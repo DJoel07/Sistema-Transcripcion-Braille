@@ -537,8 +537,540 @@ Si después de seguir esta guía aún tienes problemas:
 - Configurar HTTPS para despliegues públicos
 - La carpeta `venv/` no debe subirse a Git (ya está en `.gitignore`)
 
+## 🔐 Consideraciones de Seguridad
+
+### Para Entornos de Producción
+
+Si planeas desplegar la aplicación en un entorno público, considera:
+
+#### 1. Variables de Entorno Seguras
+
+```bash
+# Generar SECRET_KEY segura
+python -c "import secrets; print(secrets.token_hex(32))"
+
+# Agregar al .env
+SECRET_KEY=tu_clave_generada_aqui_64_caracteres
+```
+
+#### 2. HTTPS
+
+Para producción, usa HTTPS. Opciones:
+
+**Opción A: Usar servidor proxy reverso (Recomendado)**
+```bash
+# Nginx con Let's Encrypt
+sudo apt install nginx certbot python3-certbot-nginx
+sudo certbot --nginx -d tudominio.com
+```
+
+**Opción B: Usar servicio en la nube**
+- Azure App Service (HTTPS automático)
+- AWS Elastic Beanstalk
+- Google Cloud Run
+- Heroku
+
+#### 3. Firewall y Puertos
+
+```bash
+# Permitir solo puertos necesarios
+# UFW (Linux)
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+```
+
+#### 4. Actualizar Dependencias
+
+```bash
+# Revisar vulnerabilidades
+pip list --outdated
+
+# Actualizar paquetes
+pip install --upgrade Flask reportlab
+
+# Revisar con safety
+pip install safety
+safety check
+```
+
 ---
 
-**Última actualización**: 2025-11-17  
-**Versión del documento**: 1.0  
+## 🌐 Despliegue en Producción
+
+### Opción 1: Usando Gunicorn (Recomendado)
+
+Gunicorn es un servidor WSGI de producción para aplicaciones Flask.
+
+#### Instalación
+
+```bash
+# Agregar a requirements.txt
+echo "gunicorn==21.2.0" >> requirements.txt
+
+# Instalar
+pip install gunicorn
+```
+
+#### Ejecución
+
+```bash
+# Desarrollo (1 worker)
+gunicorn -w 1 -b 0.0.0.0:5000 app:app
+
+# Producción (4 workers)
+gunicorn -w 4 -b 0.0.0.0:5000 --timeout 120 app:app
+
+# Con reload automático (desarrollo)
+gunicorn -w 1 -b 0.0.0.0:5000 --reload app:app
+```
+
+#### Crear Servicio Systemd (Linux)
+
+```bash
+# Crear archivo de servicio
+sudo nano /etc/systemd/system/braille-app.service
+```
+
+**Contenido**:
+```ini
+[Unit]
+Description=Braille Transcription Service
+After=network.target
+
+[Service]
+User=tuusuario
+WorkingDirectory=/ruta/a/Sistema-Transcripcion-Braille
+Environment="PATH=/ruta/a/Sistema-Transcripcion-Braille/venv/bin"
+ExecStart=/ruta/a/Sistema-Transcripcion-Braille/venv/bin/gunicorn -w 4 -b 0.0.0.0:5000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+# Habilitar y arrancar servicio
+sudo systemctl enable braille-app
+sudo systemctl start braille-app
+sudo systemctl status braille-app
+```
+
+### Opción 2: Azure App Service
+
+#### Paso 1: Preparar Aplicación
+
+```bash
+# Crear requirements.txt actualizado
+pip freeze > requirements.txt
+
+# Crear archivo .deployment (opcional)
+echo "[config]" > .deployment
+echo "SCM_DO_BUILD_DURING_DEPLOYMENT=true" >> .deployment
+```
+
+#### Paso 2: Deploy con Azure CLI
+
+```bash
+# Instalar Azure CLI
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Login
+az login
+
+# Crear grupo de recursos
+az group create --name braille-rg --location eastus
+
+# Crear App Service Plan
+az appservice plan create --name braille-plan --resource-group braille-rg --sku B1 --is-linux
+
+# Crear Web App
+az webapp create --resource-group braille-rg --plan braille-plan --name mi-app-braille --runtime "PYTHON:3.11"
+
+# Deploy desde Git local
+az webapp deployment source config-local-git --name mi-app-braille --resource-group braille-rg
+
+# Push código
+git remote add azure <url-proporcionada>
+git push azure main:master
+```
+
+### Opción 3: Docker en Producción
+
+#### Docker Compose para Producción
+
+Crear `docker-compose.prod.yml`:
+
+```yaml
+version: '3.8'
+
+services:
+  braille-app:
+    build: .
+    container_name: braille-prod
+    ports:
+      - "80:5000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY}
+    restart: unless-stopped
+    volumes:
+      - ./logs:/usr/src/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+```
+
+#### Ejecutar
+
+```bash
+# Construir y ejecutar
+docker-compose -f docker-compose.prod.yml up -d
+
+# Ver logs
+docker-compose -f docker-compose.prod.yml logs -f
+
+# Detener
+docker-compose -f docker-compose.prod.yml down
+```
+
+---
+
+## 📊 Monitoreo y Logs
+
+### Configurar Logging
+
+Editar `app.py`:
+
+```python
+import logging
+from logging.handlers import RotatingFileHandler
+
+# Configurar logging
+if not app.debug:
+    file_handler = RotatingFileHandler('logs/braille.log', maxBytes=10240000, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+    ))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Braille Transcriptor startup')
+```
+
+### Ver Logs
+
+```bash
+# Instalación local
+tail -f logs/braille.log
+
+# Docker
+docker logs -f braille-app
+
+# Systemd
+sudo journalctl -u braille-app -f
+```
+
+---
+
+## 🔄 Actualización de la Aplicación
+
+### Actualizar Instalación Local
+
+```bash
+# 1. Hacer backup (opcional pero recomendado)
+cp -r Sistema-Transcripcion-Braille Sistema-Transcripcion-Braille-backup
+
+# 2. Navegar al directorio
+cd Sistema-Transcripcion-Braille
+
+# 3. Guardar cambios locales (si hay)
+git stash
+
+# 4. Obtener última versión
+git pull origin main
+
+# 5. Activar entorno virtual
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\Activate.ps1  # Windows
+
+# 6. Actualizar dependencias
+pip install -r requirements.txt --upgrade
+
+# 7. Reiniciar aplicación
+# Si usas systemd:
+sudo systemctl restart braille-app
+
+# Si ejecutas manualmente:
+# Ctrl+C para detener y luego:
+python app.py
+```
+
+### Actualizar Docker
+
+```bash
+# 1. Detener contenedor actual
+docker stop braille-app
+docker rm braille-app
+
+# 2. Obtener última versión del código
+git pull origin main
+
+# 3. Reconstruir imagen
+docker build -t braille-transcriptor:latest .
+
+# 4. Ejecutar nuevo contenedor
+docker run -d -p 5000:5000 --name braille-app braille-transcriptor:latest
+
+# O con docker-compose:
+docker-compose down
+docker-compose build
+docker-compose up -d
+```
+
+---
+
+## 🧪 Ejecutar Pruebas
+
+### Pruebas Unitarias
+
+```bash
+# Activar entorno virtual
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\Activate.ps1  # Windows
+
+# Ejecutar todas las pruebas
+python -m unittest discover tests/ -v
+
+# Ejecutar prueba específica
+python -m unittest tests.test_comprehensive.TestParticionEquivalencias -v
+
+# Con cobertura
+pip install coverage
+coverage run -m unittest discover tests/
+coverage report
+coverage html  # Genera reporte HTML en htmlcov/
+```
+
+### Pruebas de Integración
+
+```bash
+# Prueba de endpoint
+curl http://localhost:5000/
+
+# Prueba de transcripción (requiere jq)
+curl -X POST http://localhost:5000/api/transcribe \
+  -H "Content-Type: application/json" \
+  -d '{"text": "hola"}' | jq
+
+# Prueba de salud (si implementada)
+curl http://localhost:5000/health
+```
+
+---
+
+## 📱 Acceso Remoto
+
+### Acceso desde Otros Dispositivos en Red Local
+
+#### Configuración
+
+```python
+# En app.py, asegurar:
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
+```
+
+#### Obtener IP Local
+
+**Windows**:
+```powershell
+ipconfig
+# Buscar "Dirección IPv4"
+```
+
+**Linux/Mac**:
+```bash
+ifconfig | grep "inet "
+# o
+ip addr show
+```
+
+#### Acceder desde Otro Dispositivo
+
+```
+http://<IP_DE_TU_PC>:5000
+
+Ejemplo:
+http://192.168.1.100:5000
+```
+
+#### Firewall
+
+**Windows**: Permitir puerto 5000 en Windows Defender Firewall
+
+**Linux**:
+```bash
+sudo ufw allow 5000/tcp
+```
+
+**macOS**: System Preferences → Security & Privacy → Firewall Options
+
+---
+
+## 🔧 Configuración Avanzada
+
+### Variables de Entorno Completas
+
+Crear archivo `.env` en raíz del proyecto:
+
+```ini
+# Flask
+FLASK_APP=app.py
+FLASK_ENV=production
+FLASK_DEBUG=0
+
+# Server
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
+
+# Security
+SECRET_KEY=tu-clave-secreta-muy-larga-y-segura-aqui
+
+# PDF Generation
+PDF_MAX_SIZE=10485760  # 10MB
+PDF_TIMEOUT=30  # segundos
+
+# Transcription
+MAX_TEXT_LENGTH=500
+ALLOW_SPECIAL_CHARS=false
+
+# Logging
+LOG_LEVEL=INFO
+LOG_FILE=logs/braille.log
+LOG_MAX_BYTES=10485760
+LOG_BACKUP_COUNT=10
+```
+
+### Cargar Variables de Entorno
+
+```python
+# En app.py
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# Usar variables
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-default')
+MAX_TEXT_LENGTH = int(os.getenv('MAX_TEXT_LENGTH', 500))
+```
+
+---
+
+## 📦 Backup y Restauración
+
+### Backup Manual
+
+```bash
+# Backup completo
+tar -czf braille-backup-$(date +%Y%m%d).tar.gz Sistema-Transcripcion-Braille/
+
+# Solo código y configuración (excluir venv)
+tar -czf braille-backup-$(date +%Y%m%d).tar.gz \
+  --exclude='venv' \
+  --exclude='__pycache__' \
+  --exclude='*.pyc' \
+  Sistema-Transcripcion-Braille/
+```
+
+### Backup Automatizado (Linux)
+
+```bash
+# Crear script de backup
+nano /home/usuario/backup-braille.sh
+```
+
+```bash
+#!/bin/bash
+BACKUP_DIR="/home/usuario/backups"
+APP_DIR="/home/usuario/Sistema-Transcripcion-Braille"
+DATE=$(date +%Y%m%d_%H%M%S)
+
+mkdir -p $BACKUP_DIR
+cd $APP_DIR/..
+tar -czf $BACKUP_DIR/braille-$DATE.tar.gz \
+  --exclude='venv' \
+  --exclude='__pycache__' \
+  Sistema-Transcripcion-Braille/
+
+# Mantener solo últimos 7 backups
+cd $BACKUP_DIR
+ls -t | tail -n +8 | xargs -r rm
+
+echo "Backup completed: braille-$DATE.tar.gz"
+```
+
+```bash
+# Hacer ejecutable
+chmod +x /home/usuario/backup-braille.sh
+
+# Agregar a cron (diario a las 2 AM)
+crontab -e
+# Agregar línea:
+0 2 * * * /home/usuario/backup-braille.sh
+```
+
+### Restauración
+
+```bash
+# Detener servicio
+sudo systemctl stop braille-app  # si usas systemd
+# o detener manualmente
+
+# Extraer backup
+tar -xzf braille-backup-20251125.tar.gz
+
+# Restaurar ubicación
+mv Sistema-Transcripcion-Braille /ruta/original/
+
+# Reinstalar dependencias
+cd Sistema-Transcripcion-Braille
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Reiniciar servicio
+sudo systemctl start braille-app
+```
+
+---
+
+## 🎓 Recursos Adicionales
+
+### Documentación Relacionada
+
+- [Manual de Usuario](../06-manual-usuario/guia-usuario.md) - Para usuarios finales
+- [Documentación de Dockerización](../02-ambiente-desarrollo/dockerizacion.md) - Guía completa de Docker
+- [Plan de Pruebas](../04-casos-prueba/plan-pruebas.md) - Casos de prueba documentados
+- [Diseño Arquitectónico](../01-diseno-arquitectonico/diseno-arquitectonico.md) - Arquitectura del sistema
+
+### Comunidad y Soporte
+
+- **GitHub**: [DJoel07/Sistema-Transcripcion-Braille](https://github.com/DJoel07/Sistema-Transcripcion-Braille)
+- **Issues**: Reportar bugs y solicitar features
+- **Discussions**: Preguntas y discusiones
+
+### Aprender Más
+
+- **Flask**: https://flask.palletsprojects.com/
+- **Docker**: https://docs.docker.com/
+- **Python**: https://docs.python.org/3/
+- **ReportLab**: https://www.reportlab.com/docs/reportlab-userguide.pdf
+
+---
+
+**Última actualización**: 2025-11-25  
+**Versión del documento**: 2.0  
 **Mantenedor**: Equipo de Desarrollo

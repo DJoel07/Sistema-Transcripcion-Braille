@@ -628,11 +628,541 @@ u=⠥  v=⠧  x=⠭  y=⠽  z=⠵
 
 ---
 
-**Última actualización**: 2025-11-17  
-**Versión**: 1.0  
-**Autor**: Equipo de Desarrollo  
-**Proyecto**: Sistema de Transcripción Braille
+## 🎬 Tutorial en Video (Paso a Paso)
+
+### Video 1: Tu Primera Transcripción (2 minutos)
+
+**Minuto 0:00-0:30** - Acceder a la aplicación  
+**Minuto 0:30-1:00** - Escribir texto simple  
+**Minuto 1:00-1:30** - Transcribir a Braille  
+**Minuto 1:30-2:00** - Generar y descargar PDF
+
+*Nota: Los videos están disponibles en el repositorio GitHub en la carpeta `/docs/videos/`*
+
+### Video 2: Casos de Uso Avanzados (5 minutos)
+
+**Minuto 0:00-1:00** - Números y signos de puntuación  
+**Minuto 1:00-2:00** - Vocales acentuadas  
+**Minuto 2:00-3:00** - Frases completas con puntuación  
+**Minuto 3:00-4:00** - Validación de caracteres  
+**Minuto 4:00-5:00** - Tips de impresión
 
 ---
 
-¡Gracias por usar nuestro sistema! Tu contribución a la accesibilidad es invaluable. 🌟
+## 🖼️ Galería de Capturas de Pantalla
+
+### Interfaz Principal
+
+![Pantalla Principal](capturas/01-pantalla-principal.png)
+*Figura 1: Vista principal de la aplicación con campo de entrada*
+
+### Proceso de Transcripción
+
+![Proceso de Transcripción](capturas/02-transcribiendo.png)
+*Figura 2: Aplicación procesando texto ingresado*
+
+### Resultado de Transcripción
+
+![Resultado](capturas/03-resultado.png)
+*Figura 3: Texto original y transcripción Braille mostrados*
+
+### Generación de PDF
+
+![PDF Generado](capturas/04-pdf-preview.png)
+*Figura 4: Vista previa del PDF generado con señalética*
+
+### Ejemplos de Señalética Impresa
+
+![Señalética Impresa](capturas/05-senaletica-real.png)
+*Figura 5: Ejemplos de señalética impresa y aplicada*
+
+---
+
+## 🎯 Casos de Uso Detallados
+
+### Caso 5: Señalética para Ascensores (Completo)
+
+**Escenario**: Edificio de oficinas de 5 pisos necesita señalética Braille en ascensores
+
+**Materiales Necesarios**:
+- Papel adhesivo mate
+- Impresora láser o inkjet
+- Laminadora (opcional)
+- Tijeras o cutter
+- Cinta métrica
+
+**Proceso Completo**:
+
+#### Paso 1: Planificación
+```
+Pisos a señalizar: P, 1, 2, 3, 4, 5
+Textos requeridos:
+- "Planta Baja"
+- "Piso 1"
+- "Piso 2"
+- "Piso 3"
+- "Piso 4"
+- "Piso 5"
+```
+
+#### Paso 2: Transcripción
+
+Transcribir cada texto:
+
+| Texto Original | Braille | Notas |
+|----------------|---------|-------|
+| Planta Baja | ⠏⠇⠁⠝⠞⠁ ⠃⠁⠚⠁ | Sin número |
+| Piso 1 | ⠏⠊⠎⠕ ⠼⠁ | Número con signo ⠼ |
+| Piso 2 | ⠏⠊⠎⠕ ⠼⠃ | Número 2 = b |
+| Piso 3 | ⠏⠊⠎⠕ ⠼⠉ | Número 3 = c |
+| Piso 4 | ⠏⠊⠎⠕ ⠼⠙ | Número 4 = d |
+| Piso 5 | ⠏⠊⠎⠕ ⠼⠑ | Número 5 = e |
+
+#### Paso 3: Generación de PDFs
+
+1. Para cada piso, hacer:
+   - Transcribir texto
+   - Generar PDF
+   - Descargar y nombrar: `piso_1.pdf`, `piso_2.pdf`, etc.
+
+#### Paso 4: Impresión
+
+**Configuración de Impresora**:
+```
+Tamaño papel: A4
+Orientación: Vertical
+Calidad: Alta (1200 dpi mínimo)
+Tipo papel: Adhesivo mate
+Color: Negro sobre fondo blanco
+```
+
+#### Paso 5: Corte y Acabado
+
+1. Imprimir todos los PDFs
+2. Esperar 2 minutos (secar tinta)
+3. Laminar cada etiqueta (opcional)
+4. Cortar con margen de 5mm
+5. Redondear esquinas (opcional)
+
+#### Paso 6: Instalación
+
+1. Limpiar superficie con alcohol
+2. Medir y marcar posición (altura estándar: 1.20m)
+3. Retirar papel protector del adhesivo
+4. Aplicar de arriba hacia abajo evitando burbujas
+5. Presionar firmemente con paño suave
+
+**Tiempo Estimado Total**: 2-3 horas para 6 señales
+
+---
+
+### Caso 6: Menú de Restaurante Inclusivo
+
+**Objetivo**: Crear secciones de menú con nombres en Braille
+
+**Categorías a transcribir**:
+```
+1. Entradas → ⠑⠝⠞⠗⠁⠙⠁⠎
+2. Platos Fuertes → ⠏⠇⠁⠞⠕⠎ ⠋⠥⠑⠗⠞⠑⠎
+3. Postres → ⠏⠕⠎⠞⠗⠑⠎
+4. Bebidas → ⠃⠑⠃⠊⠙⠁⠎
+```
+
+**Implementación**:
+
+1. **Transcribir cada categoría** por separado
+2. **Generar PDF** para cada una
+3. **Imprimir en cartulina** (más resistente que papel)
+4. **Ubicación sugerida**:
+   - Inicio de cada sección del menú
+   - Altura: 10cm del borde superior de la mesa
+   - Esquina superior izquierda de cada página
+
+**Beneficio**: Clientes con discapacidad visual pueden navegar el menú de forma independiente
+
+---
+
+### Caso 7: Etiquetas para Medicamentos
+
+**Advertencia Legal**: Este ejemplo es informativo. Para uso médico oficial, consultar con especialistas certificados.
+
+**Escenario**: Etiquetar frascos de medicamentos en casa
+
+**Información a incluir**:
+```
+Ejemplo 1: "Ibuprofeno 600mg"
+Transcripción: ⠊⠃⠥⠏⠗⠕⠋⠑⠝⠕ ⠼⠋⠚⠚⠍⠛
+
+Ejemplo 2: "Tomar cada 8 horas"
+Transcripción: ⠞⠕⠍⠁⠗ ⠉⠁⠙⠁ ⠼⠓ ⠓⠕⠗⠁⠎
+```
+
+**Proceso**:
+
+1. Transcribir nombre del medicamento
+2. Transcribir dosis en línea separada
+3. Generar PDF
+4. Imprimir en papel adhesivo resistente al agua
+5. Aplicar en frasco limpio y seco
+
+**Tips de Seguridad**:
+- ✅ Incluir fecha de vencimiento
+- ✅ Usar mayúsculas para medicamentos críticos
+- ✅ Revisar transcripción dos veces
+- ✅ Validar con farmacéutico si es posible
+
+---
+
+## 🔍 Análisis de Errores Comunes
+
+### Error 1: Confusión entre Letras Similares
+
+**Problema**: Letras que se parecen visualmente
+
+| Par Confuso | Braille | Diferencia |
+|-------------|---------|------------|
+| d vs f | ⠙ vs ⠋ | d=1-4-5, f=1-2-4 |
+| h vs j | ⠓ vs ⠚ | h=1-2-5, j=2-4-5 |
+| e vs i | ⠑ vs ⠊ | e=1-5, i=2-4 |
+
+**Solución**: Siempre revisar el resultado cuidadosamente, letra por letra.
+
+---
+
+### Error 2: Olvidar el Signo de Número
+
+**Incorrecto**:
+```
+"Piso 3" → ⠏⠊⠎⠕ ⠉  ❌
+```
+
+**Correcto**:
+```
+"Piso 3" → ⠏⠊⠎⠕ ⠼⠉  ✅
+           (signo de número antes del 3)
+```
+
+**Prevención**: El sistema agrega automáticamente el signo de número. Solo verifica visualmente que esté presente.
+
+---
+
+### Error 3: Espacios Incorrectos
+
+**Incorrecto**:
+```
+"Piso   3" (3 espacios)
+```
+
+**Sistema corrige automáticamente**:
+```
+"Piso 3" (1 espacio)
+```
+
+**Nota**: El sistema normaliza múltiples espacios a uno solo automáticamente.
+
+---
+
+### Error 4: Mayúsculas Innecesarias
+
+**Entrada**:
+```
+"SALIDA DE EMERGENCIA"
+```
+
+**Sistema normaliza**:
+```
+"salida de emergencia" → ⠎⠁⠇⠊⠙⠁ ⠙⠑ ⠑⠍⠑⠗⠛⠑⠝⠉⠊⠁
+```
+
+**Nota**: En Braille español básico no se diferencian mayúsculas y minúsculas. El sistema convierte todo a minúsculas.
+
+---
+
+## 📐 Especificaciones Técnicas de Impresión
+
+### Dimensiones Recomendadas
+
+#### Señalética Pequeña (Placas de Puerta)
+```
+Ancho: 10cm
+Alto: 5cm
+Margen: 0.5cm en todos los lados
+Tamaño de fuente (tinta): 14pt
+Tamaño de puntos Braille: 2mm diámetro
+```
+
+#### Señalética Mediana (Ascensores, Pasillos)
+```
+Ancho: 15cm
+Alto: 8cm
+Margen: 1cm en todos los lados
+Tamaño de fuente (tinta): 18pt
+Tamaño de puntos Braille: 2.5mm diámetro
+```
+
+#### Señalética Grande (Exteriores, Entradas)
+```
+Ancho: 20cm o más
+Alto: 10cm o más
+Margen: 1.5cm en todos los lados
+Tamaño de fuente (tinta): 24pt
+Tamaño de puntos Braille: 3mm diámetro
+```
+
+### Separación entre Celdas Braille
+
+**Estándar Internacional**:
+- Horizontal: 2.5mm entre centros
+- Vertical: 2.5mm entre centros
+- Entre palabras: Espacio de una celda vacía
+
+### Materiales Recomendados por Uso
+
+| Ubicación | Material | Vida Útil | Costo |
+|-----------|----------|-----------|-------|
+| **Interior (oficina)** | Papel adhesivo mate 80g | 1-2 años | Bajo |
+| **Interior (tráfico alto)** | Vinyl autoadhesivo | 3-5 años | Medio |
+| **Exterior protegido** | Aluminum adhesivo | 5-7 años | Alto |
+| **Exterior expuesto** | Acero inoxidable grabado | 10+ años | Muy Alto |
+| **Temporal** | Papel común con cinta | Días-semanas | Muy Bajo |
+
+---
+
+## 🎨 Personalización del PDF
+
+### Modificar Colores (Para Desarrolladores)
+
+Si tienes acceso al código fuente, puedes personalizar los colores del PDF editando `src/services/pdf_generator.py`:
+
+```python
+# Colores actuales (negro sobre blanco)
+punto_color = colors.black
+fondo_color = colors.white
+texto_color = colors.black
+
+# Cambiar a colores personalizados (ejemplo: azul)
+punto_color = colors.Color(0, 0.2, 0.5)  # Azul oscuro
+texto_color = colors.Color(0, 0.2, 0.5)
+```
+
+### Agregar Logo o Marca
+
+Para agregar un logo corporativo al PDF:
+
+```python
+# En pdf_generator.py
+from reportlab.lib.utils import ImageReader
+
+# Agregar imagen
+logo = ImageReader('ruta/a/logo.png')
+c.drawImage(logo, x=450, y=750, width=50, height=50)
+```
+
+**Nota**: Estas modificaciones requieren conocimientos de programación en Python.
+
+---
+
+## 🌍 Cumplimiento de Normativas
+
+### Estándares de Accesibilidad
+
+La aplicación ayuda a cumplir con:
+
+#### Normativa Internacional
+- **ISO 24751**: Tecnología de información - Individualized adaptability
+- **WCAG 2.1**: Web Content Accessibility Guidelines
+- **ADA** (Americans with Disabilities Act): Señalética Braille requerida
+
+#### Normativa España
+- **UNE 41500**: Accesibilidad en la edificación
+- **Real Decreto 1/2013**: Derechos de personas con discapacidad
+
+#### Normativa México
+- **NOM-034-SSA3-2013**: Accesibilidad de las personas con discapacidad
+
+#### Normativa Argentina
+- **Ley 26.653**: Accesibilidad de la información en páginas web
+
+### Requisitos Específicos para Señalética
+
+Según ADA y normativas similares:
+
+1. **Altura de instalación**: 120-150cm del suelo
+2. **Contraste**: Mínimo 70% entre fondo y texto
+3. **Tamaño de puntos**: 2-3mm de diámetro
+4. **Ubicación**: Al lado de la manija (lado de la bisagra)
+5. **Acabado**: Superficie mate (no brillante)
+
+---
+
+## 🔒 Privacidad y Datos
+
+### Política de Privacidad
+
+**¿Qué datos recopila la aplicación?**
+
+✅ **NINGUNO**
+
+- No se almacena el texto que transcribes
+- No se recopilan datos personales
+- No se usan cookies de seguimiento
+- No se envían datos a servidores externos
+
+**Procesamiento Local**:
+- Toda la transcripción ocurre en tu navegador o servidor local
+- Los PDFs se generan en tu computadora
+- No hay almacenamiento en la nube (a menos que tú lo configures)
+
+### Seguridad
+
+```
+Tu Texto → Tu Navegador → Servidor Local → Tu PDF
+          ↑                                  ↓
+          └──────── Todo local ──────────────┘
+```
+
+---
+
+## 📞 Soporte Técnico Avanzado
+
+### Soporte por Niveles
+
+#### Nivel 1: Auto-ayuda
+- Revisar este manual
+- Consultar FAQ
+- Ver tutoriales en video
+
+#### Nivel 2: Comunidad
+- Buscar en GitHub Issues
+- Preguntar en Discussions
+- Revisar casos similares
+
+#### Nivel 3: Soporte Directo
+- Crear Issue en GitHub con etiqueta `bug` o `help wanted`
+- Incluir información detallada:
+  - Sistema operativo y versión
+  - Navegador y versión
+  - Pasos exactos para reproducir
+  - Capturas de pantalla
+  - Logs (si están disponibles)
+
+### Template para Reportar Bug
+
+```markdown
+**Descripción del problema:**
+[Describir qué salió mal]
+
+**Pasos para reproducir:**
+1. Ir a...
+2. Hacer clic en...
+3. Escribir...
+4. Ver error
+
+**Comportamiento esperado:**
+[Qué debería haber pasado]
+
+**Comportamiento actual:**
+[Qué pasó en realidad]
+
+**Capturas de pantalla:**
+[Si aplica]
+
+**Entorno:**
+- SO: Windows 11 / Ubuntu 22.04 / macOS 13
+- Navegador: Chrome 119 / Firefox 121 / Safari 17
+- Versión de la app: [ver en pie de página]
+
+**Información adicional:**
+[Cualquier contexto relevante]
+```
+
+---
+
+## 🎓 Recursos de Aprendizaje
+
+### Aprender Más Sobre Braille
+
+#### Libros Recomendados
+- "El Sistema Braille: Historia y Desarrollo" - UNESCO
+- "Manual de Braille Español" - ONCE
+
+#### Cursos Online
+- Coursera: "Accessible Design" (gratuito con certificado opcional)
+- edX: "Introduction to Braille"
+
+#### Videos Educativos
+- Canal YouTube: ONCE Discapacidad Visual
+- TED Talks sobre accesibilidad
+
+### Proyectos Relacionados
+
+- **Liblouis**: Motor de traducción Braille open source
+- **NVDA**: Lector de pantalla gratuito
+- **Braille ASCII**: Estándar para representar Braille en texto
+
+### Contribuir al Proyecto
+
+¿Quieres mejorar esta aplicación?
+
+1. **Reportar bugs**: GitHub Issues
+2. **Sugerir features**: GitHub Discussions
+3. **Contribuir código**: Pull Requests
+4. **Mejorar documentación**: Editar archivos .md
+5. **Compartir casos de uso**: Inspira a otros usuarios
+
+---
+
+## 📱 Uso en Dispositivos Móviles
+
+### Acceso desde Smartphone
+
+La aplicación es completamente responsive y funciona en móviles.
+
+**Navegadores Recomendados**:
+- ✅ Chrome (Android)
+- ✅ Safari (iOS)
+- ✅ Firefox (Android)
+- ✅ Edge (Android/iOS)
+
+### Tips para Móviles
+
+1. **Orientación**: Usar en vertical para mejor experiencia
+2. **Teclado**: Usar teclado por defecto (no autocorrector)
+3. **PDFs**: Se descargan a carpeta "Descargas"
+4. **Compartir**: Usar botón "Compartir" del navegador
+
+### Limitaciones Móviles
+
+- Editar PDF más difícil (usar computadora)
+- Impresión directa limitada (transferir a PC)
+- Pantalla pequeña para visualizar resultados largos
+
+---
+
+## 🎁 Extras y Funciones Ocultas
+
+### Atajos de Teclado
+
+| Atajo | Acción |
+|-------|--------|
+| `Ctrl + Enter` | Transcribir texto |
+| `Ctrl + L` | Limpiar campos |
+| `Ctrl + S` | Descargar PDF |
+| `Ctrl + C` | Copiar resultado |
+| `Esc` | Cerrar mensajes |
+
+### Funciones Beta
+
+Funciones experimentales (pueden cambiar):
+
+- **Modo oscuro**: Agregando próximamente
+- **Historial de transcripciones**: En desarrollo
+- **Export a múltiples formatos**: Planificado (SVG, PNG)
+- **API REST**: Para integraciones (documentación próxima)
+
+---
+
+**Última actualización**: 2025-11-25  
+**Versión**: 2.0  
+**Autor**: Equipo de Desarrollo  
+**Proyecto**: Sistema de Transcripción Braille
